@@ -1,0 +1,66 @@
+﻿DECLARE
+   student_name  VARCHAR2(50);
+   marks         NUMBER;
+   grade         CHAR(1);
+BEGIN
+   -- Iterative control: Loop through 5 students
+   FOR i IN 1..5 LOOP
+      -- Sequential control: simulate different marks using MOD
+      marks := 50 + (i * 10);  -- marks will be 60, 70, 80, 90, 100
+
+
+      -- Assign student name
+      student_name := 'Student ' || i;
+
+
+      -- Conditional control: assign grade based on marks
+      IF marks >= 90 THEN
+         grade := 'A';
+      ELSIF marks >= 80 THEN
+         grade := 'B';
+      ELSIF marks >= 70 THEN
+         grade := 'C';
+      ELSIF marks >= 60 THEN
+         grade := 'D';
+      ELSE
+         grade := 'F';
+      END IF;
+
+
+      -- Output results
+      DBMS_OUTPUT.PUT_LINE('---');
+      DBMS_OUTPUT.PUT_LINE('Name: ' || student_name);
+      DBMS_OUTPUT.PUT_LINE('Marks: ' || marks);
+      DBMS_OUTPUT.PUT_LINE('Grade: ' || grade);
+
+
+      -- Sequential control: skip next student if grade is F (not in this case)
+      IF grade = 'F' THEN
+         DBMS_OUTPUT.PUT_LINE('Failing student. Skipping next...');
+         EXIT;  -- exits loop (can also use CONTINUE to skip iteration)
+      END IF;
+   END LOOP;
+END;
+
+
+//Output
+---
+Name: Student 1
+Marks: 60
+Grade: D
+---
+Name: Student 2
+Marks: 70
+Grade: C
+---
+Name: Student 3
+Marks: 80
+Grade: B
+---
+Name: Student 4
+Marks: 90
+Grade: A
+---
+Name: Student 5
+Marks: 100
+Grade: A
